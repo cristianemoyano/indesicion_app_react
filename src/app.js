@@ -4,56 +4,60 @@ console.log('App.js is running')
 
 const app = {
     title: 'Indesicion App',
-    subtitle: 'This is some info'
+    subtitle: 'This is some info',
+    options:[],
+    printOptions() {
+        return this.options.map((option)=> {
+            return <li key={option}>{option} <button>Remove option</button></li>
+        });
+    },
 };
-
-// JSX - JavaScript XML
-const template = (
-    <div>
-        <h1>{app.title}</h1>
-        <p>{app.subtitle}</p>
-        <ol>
-            <li>Item one</li>
-            <li>Item two</li>
-        </ol>
-    </div>
-); 
-let count = 0;
-
-const addOne = (num) => {
-    count++;
-    renderCounterApp();
-    console.log('addOne '+count);
-}
-const minusOne = (num) => {
-    if (count != 0){
-        count--;
-        renderCounterApp();
-        console.log('addOne '+count);
+const onFormSubmit = (e) => {
+    e.preventDefault();
+    const option = e.target.elements.option.value;
+    if (option){
+        app.options.push(option);
+        e.target.elements.option.value = '';
+        render();
+        console.log(app.options);
     }
-    
-}
-const reset = (num) => {
-    count = 0;
-    renderCounterApp();
-    console.log('addOne '+count);
 }
 
+const onMakeDecision = () => {
+    const randomNum = Math.floor(Math.random() * app.options.length);
+    const option = app.options[randomNum];
+    alert(option);
+}
+
+const onRemoveAll = () => {
+    if (app.options){
+        app.options = [];
+        render();
+        console.log(app.options);
+    }
+}
 
 const appRoot = document.getElementById('app');
 
-const renderCounterApp = () => {
-    const templateTwo = (
+
+const render = () => {
+    const template = (
         <div>
-          <h1>Count: {count}</h1>
-          <button onClick={minusOne} >+1</button>
-          <button onClick={minusOne} >-1</button>
-          <button onClick={reset} >reset</button>
-    
+            <h1>{app.title}</h1>
+            <p>{app.subtitle}</p>
+            <p>{app.options.length > 0 ? 'Here are your options': 'No options'}</p>
+            <button disabled={app.options.length === 0} onClick={onMakeDecision}>What should I do?</button>
+            <button onClick={onRemoveAll}>Remove All</button> 
+            <ol>
+                {app.printOptions()}
+            </ol>
+            <form onSubmit={onFormSubmit}>
+                <input type="text" name="option"/>
+                <button>Add option</button>
+            </form>
         </div>
     ); 
-    ReactDOM.render(templateTwo, appRoot);
+    ReactDOM.render(template, appRoot)
 };
 
-renderCounterApp();
-
+render();
