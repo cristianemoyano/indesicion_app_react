@@ -25,9 +25,18 @@ const addOne = (num) => {
     console.log('addOne '+count);
 }
 const minusOne = (num) => {
+<<<<<<< HEAD
     count--;
     renderCounterApp();
     console.log('addOne '+count);
+=======
+    if (count != 0){
+        count--;
+        renderCounterApp();
+        console.log('addOne '+count);
+    }
+    
+>>>>>>> add counter app
 }
 const reset = (num) => {
     count = 0;
@@ -42,7 +51,11 @@ const renderCounterApp = () => {
         <div>
           <h1>Count: {count}</h1>
           <button onClick={addOne} >+1</button>
+<<<<<<< HEAD
           <button onClick={minusOne} >+1</button>
+=======
+          <button onClick={minusOne} >-1</button>
+>>>>>>> add counter app
           <button onClick={reset} >reset</button>
     
         </div>
