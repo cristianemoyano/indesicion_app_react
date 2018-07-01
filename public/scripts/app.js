@@ -1,47 +1,88 @@
 'use strict';
 
-// arguments object - no longer bound with arrow functions
+console.log('App.js is running');
 
-var add = function add(a, b) {
-    return a + b;
+//create app object title/subtitle
+
+var app = {
+    title: 'Indesicion App',
+    subtitle: 'This is some info'
 };
 
-console.log(add(55, 1, 1001));
-
-// this keyword - no longer bound
-
-var user = {
-    name: 'Cristian',
-    cities: ['Mendoza', 'Maipú', 'Luján'],
-    printPlacesLived: function printPlacesLived() {
-        var _this = this;
-
-        var that = this;
-        this.cities.forEach(function (city) {
-            console.log(_this.name + ' has lived in ' + city);
-        });
-    },
-    printCitiesLived: function printCitiesLived() {
-        var _this2 = this;
-
-        return this.cities.map(function (city) {
-            return _this2.name + ' has lived in ' + city;
-        });
-    }
+// JSX - JavaScript XML
+var template = React.createElement(
+    'div',
+    null,
+    React.createElement(
+        'h1',
+        null,
+        app.title
+    ),
+    React.createElement(
+        'p',
+        null,
+        app.subtitle
+    ),
+    React.createElement(
+        'ol',
+        null,
+        React.createElement(
+            'li',
+            null,
+            'Item one'
+        ),
+        React.createElement(
+            'li',
+            null,
+            'Item two'
+        )
+    )
+);
+var count = 0;
+var addOne = function addOne(num) {
+    count++;
+    renderCounterApp();
+    console.log('addOne ' + count);
 };
-user.printPlacesLived();
-console.log(user.printCitiesLived());
-
-// multiplier
-var multiplier = {
-    numbers: [1, 2, 3, 4, 5, 6],
-    multiplyBy: 2,
-    multiply: function multiply() {
-        var _this3 = this;
-
-        return this.numbers.map(function (num) {
-            return num * _this3.multiplyBy;
-        });
-    }
+var minusOne = function minusOne(num) {
+    count--;
+    renderCounterApp();
+    console.log('addOne ' + count);
 };
-console.log(multiplier.multiply());
+var reset = function reset(num) {
+    count = 0;
+    renderCounterApp();
+    console.log('addOne ' + count);
+};
+
+var appRoot = document.getElementById('app');
+
+var renderCounterApp = function renderCounterApp() {
+    var templateTwo = React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            'Count: ',
+            count
+        ),
+        React.createElement(
+            'button',
+            { onClick: addOne },
+            '+1'
+        ),
+        React.createElement(
+            'button',
+            { onClick: minusOne },
+            '+1'
+        ),
+        React.createElement(
+            'button',
+            { onClick: reset },
+            'reset'
+        )
+    );
+    ReactDOM.render(templateTwo, appRoot);
+};
+renderCounterApp();
