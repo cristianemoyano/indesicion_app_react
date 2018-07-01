@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "babel-preset-env": "1.5.2",
+    "babel-preset-react": "6.24.1",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  },
+  "name": "indesicion_app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Cristian",
+  "license": "MIT"
+}
