@@ -27,6 +27,33 @@ var IndesicionApp = function (_React$Component) {
     }
 
     _createClass(IndesicionApp, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log('fetching data');
+            var json = localStorage.getItem('options');
+            var options = JSON.parse(json);
+            this.setState(function () {
+                return {
+                    options: options
+                };
+            });
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps, prevState) {
+
+            if (prevState.options.length !== this.state.options.length) {
+                var json = JSON.stringify(this.state.options);
+                localStorage.setItem('options', json);
+                console.log('saving data');
+            }
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            console.log('will unmount');
+        }
+    }, {
         key: 'handleDeleteAllOptions',
         value: function handleDeleteAllOptions() {
             this.setState(function () {

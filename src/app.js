@@ -9,6 +9,30 @@ class IndesicionApp extends React.Component {
             options: props.options
         }
     }
+    componentDidMount() {
+        console.log('fetching data');
+        const json = localStorage.getItem('options')
+        const options = JSON.parse(json);
+        this.setState(()=>{
+            return {
+            options: options
+            }
+        });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        
+        if (prevState.options.length !== this.state.options.length) {
+            const json = JSON.stringify(this.state.options)
+            localStorage.setItem('options', json)
+            console.log('saving data');
+        }
+        
+    }
+    componentWillUnmount() {
+        console.log('will unmount');
+    }
+
     handleDeleteAllOptions() {
         this.setState(()=>{
             return {
