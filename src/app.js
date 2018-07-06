@@ -10,14 +10,19 @@ class IndesicionApp extends React.Component {
         }
     }
     componentDidMount() {
-        console.log('fetching data');
-        const json = localStorage.getItem('options')
-        const options = JSON.parse(json);
-        this.setState(()=>{
-            return {
-            options: options
-            }
-        });
+        try {
+            const json = localStorage.getItem('options')
+            const options = JSON.parse(json);
+            if (options) {
+                this.setState(()=>{
+                    return {
+                    options: options
+                    }
+                });
+        }
+        } catch (e) {
+            
+        }   
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -120,6 +125,7 @@ const Options = function (props) {
     return (
         <div>
             <button onClick={props.handleDeleteAllOptions}>Remove All</button>
+            {props.options.length === 0 && <p>Please add an option to get started!</p> }
             {
                 props.options.map((option)=>(
                     <Option key={option} optionText={option}
@@ -168,6 +174,10 @@ class AddOption extends React.Component {
                 error
             }
         });
+
+        if(!error){
+            e.target.elements.option.value = '';
+        }
     }
     render() {
         return (

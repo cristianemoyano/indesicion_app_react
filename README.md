@@ -1,7 +1,16 @@
-React APP for Testing
+# React APP for Testing
 
-runserver: 
-live-server public
+### required: 
+[Yarn](https://yarnpkg.com/lang/en/)
 
-run babel compiler:
-babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
+### Getting started: 
+
+**1. install dependencies:**
+`yarn install`
+
+**2. run server:** 
+`yarn serve`
+
+**3. run babel:**
+`yarn build`
+
