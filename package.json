@@ -11,8 +11,8 @@
   "dependencies": {
     "babel-preset-env": "1.5.2",
     "babel-preset-react": "6.24.1",
-    "live-server": "^1.2.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "live-server": "^1.2.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   }
 }
